@@ -48,47 +48,8 @@ class _HomeShimmerState extends State<HomeShimmer> {
       appBar: AppBar(
         title: const Text("ShimmerA example"),
       ),
-      body: Column(
+      body: Row(
         children: [
-          SizedBox(
-            height: 90,
-            width: double.infinity,
-            child: ShimmerA(
-              shimmerCount: 10,
-              shimmerAxis: Axis.horizontal,
-              shimmerWidget: const [
-                ShimmerWidget(
-                  height: 50,
-                  width: 50,
-                  radius: 40,
-                  padding: EdgeInsets.all(5.0),
-                ),
-              ],
-              isLoading: _isLoading,
-              child: ListView.builder(
-                physics: _isLoading ? const NeverScrollableScrollPhysics() : null,
-                itemCount: data.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 60,
-                    width: 60,
-                    padding: const EdgeInsets.all(5.0),
-                    child: CircleAvatar(
-                      radius: 40,
-                      child: ClipOval(
-                        child: Image.asset(
-                          data[index],
-                          fit: BoxFit.cover,
-                          width: 50,height: 50,),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-
           Expanded(
             child: ShimmerA(
               shimmerCount: 5,
@@ -96,18 +57,61 @@ class _HomeShimmerState extends State<HomeShimmer> {
               shimmerWidget: [
                 ShimmerWidget(
                   height: 150,
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width/2-14,
                   radius: 15,
+                ),
+                ShimmerARow(
+                    children: [
+                      const ShimmerWidget(
+                        height: 50,
+                        width: 50,
+                        radius: 50,
+                      ),
+                      ShimmerWidget(
+                        height: 24,
+                        width: MediaQuery.of(context).size.width / 4,
+                        radius: 8,
+                      )
+                    ]
                 ),
                 ShimmerWidget(
                   height: 24,
-                  width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width / 4,
                   radius: 8,
                   margin: const EdgeInsets.only(left: 8),
                 ),
               ],
               child: ListView.builder(
-                physics: _isLoading ? const NeverScrollableScrollPhysics() : null,
+                itemCount:data.length,
+                itemBuilder: (context, index) {
+                  return CardListItem(imagePath:data[index]);
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            child: ShimmerA(
+              shimmerCount: 5,
+              isLoading: _isLoading,
+              shimmerWidget: [
+                ShimmerWidget(
+                  height: 150,
+                  width: MediaQuery.of(context).size.width/2-14,
+                  radius: 15,
+                ),
+                ShimmerWidget(
+                  height: 24,
+                  width: MediaQuery.of(context).size.width / 3,
+                  radius: 8,
+                ),
+                ShimmerWidget(
+                  height: 24,
+                  width: MediaQuery.of(context).size.width / 4,
+                  radius: 8,
+                  margin: const EdgeInsets.only(left: 8),
+                ),
+              ],
+              child: ListView.builder(
                 itemCount:data.length,
                 itemBuilder: (context, index) {
                   return CardListItem(imagePath:data[index]);
