@@ -96,26 +96,26 @@ class _HomeShimmerState extends State<HomeShimmer> {
                     isShimmer: _isLoading,
                     shimmerWidget: [
                       ShimmerWidget(
-                        height: 150,
+                        height: 100,
                         width: MediaQuery.of(context).size.width/2-14,
-                        radius: 15,
+                        radius: 10,
                       ),
                       ShimmerARow(
                           children: [
                             const ShimmerWidget(
-                              height: 50,
-                              width: 50,
+                              height: 40,
+                              width: 40,
                               radius: 50,
                             ),
                             ShimmerWidget(
-                              height: 24,
+                              height: 16,
                               width: MediaQuery.of(context).size.width / 4,
                               radius: 8,
                             )
                           ]
                       ),
                       ShimmerWidget(
-                        height: 24,
+                        height: 16,
                         width: MediaQuery.of(context).size.width / 4,
                         radius: 8,
                         margin: const EdgeInsets.only(left: 8),
@@ -124,7 +124,7 @@ class _HomeShimmerState extends State<HomeShimmer> {
                     child: ListView.builder(
                       itemCount:data.length,
                       itemBuilder: (context, index) {
-                        return CardListItem(imagePath:data[index]);
+                        return CardListItem(imagePath:data[index],status:false);
                       },
                     ),
                   ),
@@ -146,26 +146,26 @@ class _HomeShimmerState extends State<HomeShimmer> {
                     ),
                     shimmerWidget: [
                       ShimmerWidget(
-                        height: 150,
+                        height: 100,
                         width: MediaQuery.of(context).size.width/2-14,
-                        radius: 15,
+                        radius: 8,
                       ),
                       ShimmerWidget(
-                        height: 24,
+                        height: 16,
                         width: MediaQuery.of(context).size.width / 3,
-                        radius: 8,
+                        radius: 5,
                       ),
                       ShimmerWidget(
-                        height: 24,
+                        height: 16,
                         width: MediaQuery.of(context).size.width / 4,
-                        radius: 8,
-                        margin: const EdgeInsets.only(left: 8),
+                        radius: 5,
+                        margin: const EdgeInsets.only(bottom: 8,left: 2),
                       ),
                     ],
                     child: ListView.builder(
                       itemCount:data.length,
                       itemBuilder: (context, index) {
-                        return CardListItem(imagePath:data[index]);
+                        return CardListItem(imagePath:data[index],status:true);
                       },
                     ),
                   ),
@@ -213,8 +213,10 @@ class _HomeShimmerState extends State<HomeShimmer> {
 
 class CardListItem extends StatelessWidget {
   final String imagePath;
+  final bool status;
   const CardListItem({
     required this.imagePath,
+    required this.status,
     super.key,
   });
 
@@ -228,6 +230,7 @@ class CardListItem extends StatelessWidget {
           _buildImage(imagePath),
           const SizedBox(height: 16),
           _buildText(),
+          if(status)_buildText(),
         ],
       ),
     );
