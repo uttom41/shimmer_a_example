@@ -48,75 +48,129 @@ class _HomeShimmerState extends State<HomeShimmer> {
       appBar: AppBar(
         title: const Text("ShimmerA example"),
       ),
-      body: Row(
+      body: Column(
         children: [
-          Expanded(
+          SizedBox(
+            height: 70,
             child: ShimmerA(
-              shimmerCount: 5,
-              isLoading: _isLoading,
-              shimmerWidget: [
+              shimmerCount: 35,
+              isShimmer: _isLoading,
+              shimmerAxis: Axis.horizontal,
+              shimmerWidget: const [
                 ShimmerWidget(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width/2-14,
-                  radius: 15,
-                ),
-                ShimmerARow(
-                    children: [
-                      const ShimmerWidget(
-                        height: 50,
-                        width: 50,
-                        radius: 50,
-                      ),
-                      ShimmerWidget(
-                        height: 24,
-                        width: MediaQuery.of(context).size.width / 4,
-                        radius: 8,
-                      )
-                    ]
-                ),
-                ShimmerWidget(
-                  height: 24,
-                  width: MediaQuery.of(context).size.width / 4,
-                  radius: 8,
-                  margin: const EdgeInsets.only(left: 8),
+                  height: 50,
+                  width: 50,
+                  radius: 50,
                 ),
               ],
               child: ListView.builder(
                 itemCount:data.length,
+                scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return CardListItem(imagePath:data[index]);
+                  return Container(
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      radius: 40,
+                      child: ClipOval(
+                        child: Image.asset(
+                          data[index],
+                          fit: BoxFit.cover,
+                          width: 50,
+                          height: 50,
+                        ),
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
           ),
           Expanded(
-            child: ShimmerA(
-              shimmerCount: 5,
-              isLoading: _isLoading,
-              shimmerWidget: [
-                ShimmerWidget(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width/2-14,
-                  radius: 15,
+            child: Row(
+              children: [
+                Expanded(
+                  child: ShimmerA(
+                    shimmerCount: 5,
+                    isShimmer: _isLoading,
+                    shimmerWidget: [
+                      ShimmerWidget(
+                        height: 150,
+                        width: MediaQuery.of(context).size.width/2-14,
+                        radius: 15,
+                      ),
+                      ShimmerARow(
+                          children: [
+                            const ShimmerWidget(
+                              height: 50,
+                              width: 50,
+                              radius: 50,
+                            ),
+                            ShimmerWidget(
+                              height: 24,
+                              width: MediaQuery.of(context).size.width / 4,
+                              radius: 8,
+                            )
+                          ]
+                      ),
+                      ShimmerWidget(
+                        height: 24,
+                        width: MediaQuery.of(context).size.width / 4,
+                        radius: 8,
+                        margin: const EdgeInsets.only(left: 8),
+                      ),
+                    ],
+                    child: ListView.builder(
+                      itemCount:data.length,
+                      itemBuilder: (context, index) {
+                        return CardListItem(imagePath:data[index]);
+                      },
+                    ),
+                  ),
                 ),
-                ShimmerWidget(
-                  height: 24,
-                  width: MediaQuery.of(context).size.width / 3,
-                  radius: 8,
-                ),
-                ShimmerWidget(
-                  height: 24,
-                  width: MediaQuery.of(context).size.width / 4,
-                  radius: 8,
-                  margin: const EdgeInsets.only(left: 8),
+                Expanded(
+                  child: ShimmerA(
+                    shimmerCount: 5,
+                    isShimmer: _isLoading,
+                    ownGradient: LinearGradient(
+                        colors: [
+                               Color(0xEC212105),
+                               Color(0x4299EFFF),
+                               Color(0x5B191905),
+                             ],
+                             stops: [0.0, 0.5, 1.0],
+                             begin: Alignment.centerRight,
+                             end: Alignment.centerLeft,
+                             tileMode: TileMode.clamp,
+                    ),
+                    shimmerWidget: [
+                      ShimmerWidget(
+                        height: 150,
+                        width: MediaQuery.of(context).size.width/2-14,
+                        radius: 15,
+                      ),
+                      ShimmerWidget(
+                        height: 24,
+                        width: MediaQuery.of(context).size.width / 3,
+                        radius: 8,
+                      ),
+                      ShimmerWidget(
+                        height: 24,
+                        width: MediaQuery.of(context).size.width / 4,
+                        radius: 8,
+                        margin: const EdgeInsets.only(left: 8),
+                      ),
+                    ],
+                    child: ListView.builder(
+                      itemCount:data.length,
+                      itemBuilder: (context, index) {
+                        return CardListItem(imagePath:data[index]);
+                      },
+                    ),
+                  ),
                 ),
               ],
-              child: ListView.builder(
-                itemCount:data.length,
-                itemBuilder: (context, index) {
-                  return CardListItem(imagePath:data[index]);
-                },
-              ),
             ),
           ),
         ],
